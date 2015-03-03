@@ -1,0 +1,17 @@
+<div style="width:500px;margin:50px auto;border:1px solid #e5e5e5;padding: 40px;border-radius:3px;background:white;">
+<h3><%= link_to 'new article', new_article_path %> <%= link_to 'sign out', destroy_user_session_path, method: :delete %></h3>
+	
+	<table class="table">
+		<thead>
+			<th>Title</th>
+			<th>Content</th>
+			<th>Options</th>
+		</thead>
+  		<% @article.each do |art| %>
+
+			<tr><td><%= art.id %></td><td><%= art.title %></td><td><%= art.content %></td><td><%= link_to 'show', article_path(art) %> <%= link_to 'edit', edit_article_path(art) %> <%= link_to 'delete', article_path(art), method: :delete %></td></tr>
+
+		<% end %>
+	</table>	
+	
+</div>
