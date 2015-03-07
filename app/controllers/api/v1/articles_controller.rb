@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < ActionController::Base
-	protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/vnd.myapp.v1' }
+	protect_from_forgery with: :null_session
 	before_filter :authenticate
 
 	def index
