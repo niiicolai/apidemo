@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       match '/articles/show/:id' => 'articles#show', :via => :get
       match '/articles/:id' => 'articles#destroy', :via => :delete
       match '/articles/:id' => 'articles#update', :via => :put
+      match '/articles/token' => 'articles#create_token', :via => :post
     end
   end
 end
