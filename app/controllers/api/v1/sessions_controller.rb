@@ -4,11 +4,17 @@ class Api::V1::SessionsController < Devise::SessionsController
     before_filter :authenticate, :only => [:destroy]
 
     def create
-      warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-      begin
-      access_token = SecureRandom.hex
-      current_user.update(:token => access_token)
-      render :json => { :info => "Logged in", :user => current_user }, :status => 200
+      user = User.find_by_email(params[:user][:email])
+      if user.blank?
+        render :json => { :info => "Couldn't find a user with that email"}, :status => 200
+      else
+        if user.valid_password?(params[:user][:password])
+          access_token = SecureRandom.hex
+          current_user.update(:token => access_token)
+          render :json => { :info => "Logged in", :user => current_user }, :status => 200
+        else
+          render :json => { :info => "email or password is wrong"}, :status => 200
+        end
       end
     end
 
