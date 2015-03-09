@@ -6,10 +6,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     scope module: :v1 do
-      devise_scope :user do
         match '/sessions' => 'sessions#create', :via => :post
         match '/sessions/:id' => 'sessions#destroy', :via => :delete
-      end
       match '/articles/:id' => 'articles#index', :via => :get
       match '/articles/:id' => 'articles#create', :via => :post
       match '/articles/show/:id' => 'articles#show', :via => :get
